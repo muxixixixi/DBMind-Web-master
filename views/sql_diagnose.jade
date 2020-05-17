@@ -1,0 +1,87 @@
+extends layout
+block content
+    .page-header
+      h1 OLTP Performance Prediction & Diagnose
+    .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
+      .row
+        .col-4
+          label.col-form-label(for='db_instance_selector') Benchmark:
+        .col-8
+          select#db_instance_selector.form-control.form-control-sm
+            option 测试数据集实例1 | TPC-C
+      .input-group
+        label(for='startTime') START TIME
+        input#startTime.form-control.dateTime(type='text', name='startTime')
+      .input-group
+        label(for='endTime') END TIME
+        input#endTime.form-control.dateTime(type='text', name='endTime')
+      .btn-toolbar.mb-2.mb-md-0
+        .btn-group.mr-2
+          button#confirm.btn.btn-sm.btn-outline-secondary(type='button') Confirm
+
+
+    br
+    .row
+      .col-xs-12.col-sm-12.col-md-12
+        .card
+          .card-body
+            .row
+              #col-md-3.col-3.text-center(style='border-right: 1.5px solid #dee2e6!important')
+                h5.text-muted slow queries
+                table#slowQueries.table.table-bordered
+                  thead
+                    tr
+                      th(scope='col') Transid
+                      th(scope='col') Queryid
+                      th(scope='col') Query
+                      th(scope='col') Duration
+                  tbody#slowQueriesRows
+
+              #col-md-5.col-5.text-center(style='border-right: 1.5px solid #dee2e6!important')
+                h5.text-muted Topk Most Impactive Queries in Workload
+                table#topK.table.table-bordered
+                  thead
+                    tr
+                      th(scope='col') QueryId
+                      th(scope='col') Query
+                  tbody#topKRows
+
+                h5.text-muted Index Recomendation
+                table#IndexRecommendation.table.table-bordered
+                  thead
+                    tr
+                      th(scope='col') Indexes
+                      th(scope='col') Improvement
+                  tbody#IndexRecommendationRows
+
+              #performance_div.col-md-4.col-4.text-center(style='border-right: 1.5px solid #dee2e6!important')
+                h5.text-muted Execution Time Prediction (Transaction)
+                #trans_performance
+                h5.text-muted Execution Time Prediction (Selected SQL)
+                #sql_performance
+
+
+    br
+    .row
+      .col-xs-12.col-sm-12.col-md-12
+        .card
+          .card-body
+            .row
+              #col-md-4.col-4.text-center(style='border-right: 1.5px solid #dee2e6!important')
+                h5.text-muted Query Cost Estimation
+                table#costEstimation.table.table-bordered
+                  thead
+                    tr
+                      th(scope='col') Total Cost
+                      th(scope='col') Page Hit
+                      th(scope='col') Page Read
+                  tbody#costEstimationRows
+
+              #col-md-6.col-6.text-center(style='border-right: 1.5px solid #dee2e6!important')
+                h5.text-muted Diagnose Infomation
+                  ul.timeline.widget
+                    h5#diagnoseInfo
+
+
+
+
